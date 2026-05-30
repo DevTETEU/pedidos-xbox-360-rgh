@@ -12,10 +12,15 @@ interface Game {
 const GameSelection: React.FC = () => {
     const navigate = useNavigate();
     const {
+        client,
         selectedGames, toggleGame,
         paidGamesCount, totalPrice,
         consoleInfo
     } = useOrder();
+
+    React.useEffect(() => {
+        if (!client.nome) navigate('/client');
+    }, [client.nome, navigate]);
 
     const [searchTerm, setSearchTerm] = useState('');
     const [activeCategory, setActiveCategory] = useState('Todas');

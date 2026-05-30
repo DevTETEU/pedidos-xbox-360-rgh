@@ -5,7 +5,11 @@ import { useOrder } from '../../context/OrderContext';
 
 const ConsoleSelection: React.FC = () => {
     const navigate = useNavigate();
-    const { consoleInfo, setConsoleInfo } = useOrder();
+    const { client, consoleInfo, setConsoleInfo } = useOrder();
+
+    React.useEffect(() => {
+        if (!client.nome) navigate('/client');
+    }, [client.nome, navigate]);
 
     const handleModelChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setConsoleInfo({ ...consoleInfo, modelo: e.target.value });

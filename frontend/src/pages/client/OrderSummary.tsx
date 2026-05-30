@@ -11,58 +11,37 @@ const OrderSummary: React.FC = () => {
         resetOrder
     } = useOrder();
 
+    React.useEffect(() => {
+        if (!client.nome) navigate('/client');
+    }, [client.nome, navigate]);
+
     const [submitting, setSubmitting] = useState(false);
 
     const handleConfirm = () => {
         setSubmitting(true);
 
-        // Prepare items with free/paid flag
-        // Logic: First 5 (or logic in context) are free. 
-        // Wait, context has count but not individual mapping.
-        // I need to map the games to "free" or "paid" for the backend.
+        const gamesText = selectedGames.map(g => `- ${g.nome} (${g.categoria})`).join('%0A');
+        
+        let message = `*NOVO PEDIDO - XBOX 360*%0A%0A`;
+        message += `*Cliente:* ${client.nome}%0A`;
+        message += `*WhatsApp:* ${client.whatsapp}%0A`;
+        if (client.observacoes) message += `*Obs:* ${client.observacoes}%0A`;
+        message += `%0A*CONSOLE*%0A`;
+        message += `*Modelo:* ${consoleInfo.modelo}%0A`;
+        message += `*Desbloqueio RGH:* ${consoleInfo.desbloqueio ? 'Sim (+R$50)' : 'Não'}%0A`;
+        message += `*Armazenamento:* ${consoleInfo.possuiArmazenamento ? 'Possui' : 'Não possui'}%0A`;
+        message += `%0A*JOGOS ESCOLHIDOS (${selectedGames.length})*%0A`;
+        message += gamesText + '%0A';
+        message += `%0A*TOTAL A PAGAR:* R$ ${totalPrice.toFixed(2).replace('.', ',')}%0A`;
 
-        let freeQuota = consoleInfo.desbloqueio ? 5 : 0;
-        const items = selectedGames.map((game) => {
-            const isFree = freeQuota > 0;
-            if (isFree) freeQuota--;
-            return {
-                jogoNome: game.nome,
-                gratuito: isFree
-            };
-        });
-
-        const payload = {
-            cliente: client.nome,
-            whatsapp: client.whatsapp,
-            observacoes: client.observacoes,
-            modeloXbox: consoleInfo.modelo,
-            desbloqueio: consoleInfo.desbloqueio,
-            possuiArmazenamento: consoleInfo.possuiArmazenamento,
-            total: totalPrice,
-            itens: items
-        };
-
-        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
-
-        fetch(`${API_URL}/api/orders`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        })
-            .then(res => {
-                if (!res.ok) throw new Error('Falha ao enviar');
-                return res.json();
-            })
-            .then(data => {
-                alert(`Pedido #${data.id} enviado com sucesso! Entraremos em contato.`);
-                resetOrder();
-                navigate('/');
-            })
-            .catch(err => {
-                console.error(err);
-                alert('Erro ao enviar pedido. Tente novamente.');
-                setSubmitting(false);
-            });
+        const phoneNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '5511999999999';
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+        
+        window.open(whatsappUrl, '_blank');
+        
+        resetOrder();
+        navigate('/');
+        setSubmitting(false);
     };
 
     return (

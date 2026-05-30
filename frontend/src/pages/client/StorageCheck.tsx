@@ -5,7 +5,11 @@ import { useOrder } from '../../context/OrderContext';
 
 const StorageCheck: React.FC = () => {
     const navigate = useNavigate();
-    const { consoleInfo, setConsoleInfo } = useOrder();
+    const { client, consoleInfo, setConsoleInfo } = useOrder();
+
+    React.useEffect(() => {
+        if (!client.nome) navigate('/client');
+    }, [client.nome, navigate]);
 
     const handleSelection = (hasStorage: boolean) => {
         setConsoleInfo({ ...consoleInfo, possuiArmazenamento: hasStorage });
