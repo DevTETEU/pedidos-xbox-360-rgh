@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useOrder } from '../../context/OrderContext';
+import gamesData from '../../data/games.json';
 
 interface Game {
     id: number;
@@ -16,38 +17,19 @@ const GameSelection: React.FC = () => {
         consoleInfo
     } = useOrder();
 
-    const [games, setGames] = useState<Game[]>([]);
-    const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [activeCategory, setActiveCategory] = useState('Todas');
 
-    // Categories derived from data or static
-    const CATEGORIES = ['Todas', 'Ação', 'Aventura', 'Corrida', 'Esporte', 'RPG', 'Tiro (FPS)', 'Infantil'];
-
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
-
-    useEffect(() => {
-        fetch(`${API_URL}/api/games`)
-            .then(res => res.json())
-            .then(data => {
-                setGames(data);
-                setLoading(false);
-            })
-            .catch(err => {
-                console.error('Error fetching games:', err);
-                setLoading(false);
-            });
-    }, [API_URL]);
+    // Extract unique categories dynamically, prepending 'Todas'
+    const CATEGORIES = ['Todas', ...Array.from(new Set(gamesData.map((g: any) => g.categoria)))].filter(Boolean);
 
     const filteredGames = useMemo(() => {
-        return games.filter(game => {
+        return (gamesData as Game[]).filter(game => {
             const matchesSearch = game.nome.toLowerCase().includes(searchTerm.toLowerCase());
             const matchesCategory = activeCategory === 'Todas' || game.categoria === activeCategory;
             return matchesSearch && matchesCategory;
         });
-    }, [games, searchTerm, activeCategory]);
-
-    if (loading) return <div className="container center"><h2>Carregando catálogo de jogos...</h2></div>;
+    }, [searchTerm, activeCategory]);
 
     return (
         <div className="container fade-in">
