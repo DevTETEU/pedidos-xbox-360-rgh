@@ -34,7 +34,7 @@ const OrderSummary: React.FC = () => {
         message += gamesText + '%0A';
         message += `%0A*TOTAL A PAGAR:* R$ ${totalPrice.toFixed(2).replace('.', ',')}%0A`;
 
-        const phoneNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '5511999999999';
+        const phoneNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '5564999785886';
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
         
         window.open(whatsappUrl, '_blank');
