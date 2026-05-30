@@ -26,7 +26,7 @@ const OrderSummary: React.FC = () => {
             const isFree = freeQuota > 0;
             if (isFree) freeQuota--;
             return {
-                jogoId: game.id,
+                jogoNome: game.nome,
                 gratuito: isFree
             };
         });
@@ -125,7 +125,7 @@ const OrderSummary: React.FC = () => {
 
                     <div style={{ maxHeight: '250px', overflowY: 'auto', paddingRight: '10px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                         {selectedGames.map(g => (
-                            <div key={g.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
+                            <div key={g.nome} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
                                 <div>
                                     <p style={{ fontWeight: '500' }}>{g.nome}</p>
                                     <span style={{ color: '#888', fontSize: '0.8rem' }}>{g.categoria}</span>

@@ -26,7 +26,7 @@ interface OrderContextType {
     setConsoleInfo: React.Dispatch<React.SetStateAction<ConsoleData>>;
     selectedGames: Game[];
     addGame: (game: Game) => void;
-    removeGame: (gameId: number) => void;
+    removeGame: (gameNome: string) => void;
     toggleGame: (game: Game) => void;
     totalPrice: number;
     freeGamesCount: number;
@@ -59,18 +59,18 @@ export const OrderProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     const addGame = (game: Game) => {
         setSelectedGames((current) => {
-            if (current.some((g) => g.id === game.id)) return current;
+            if (current.some((g) => g.nome === game.nome)) return current;
             return [...current, game];
         });
     };
 
-    const removeGame = (gameId: number) => {
-        setSelectedGames((current) => current.filter((g) => g.id !== gameId));
+    const removeGame = (gameNome: string) => {
+        setSelectedGames((current) => current.filter((g) => g.nome !== gameNome));
     };
 
     const toggleGame = (game: Game) => {
-        if (selectedGames.find(g => g.id === game.id)) {
-            removeGame(game.id);
+        if (selectedGames.find(g => g.nome === game.nome)) {
+            removeGame(game.nome);
         } else {
             addGame(game);
         }

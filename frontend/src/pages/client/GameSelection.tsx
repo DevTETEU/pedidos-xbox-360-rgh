@@ -106,10 +106,10 @@ const GameSelection: React.FC = () => {
             {/* Game Grid */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '15px' }}>
                 {filteredGames.map(game => {
-                    const isSelected = !!selectedGames.find(g => g.id === game.id);
+                    const isSelected = !!selectedGames.find(g => g.nome === game.nome);
                     return (
                         <div
-                            key={game.id}
+                            key={game.nome}
                             className="card"
                             onClick={() => toggleGame(game)}
                             style={{
