@@ -54,7 +54,7 @@ export const OrderProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     );
     const totalPrice = useMemo(() => {
         const rghPrice = consoleInfo.desbloqueio ? 50 : 0;
-        return rghPrice + (paidGamesCount * 4);
+        return rghPrice + (paidGamesCount * 5);
     }, [consoleInfo.desbloqueio, paidGamesCount]);
 
     const addGame = (game: Game) => {

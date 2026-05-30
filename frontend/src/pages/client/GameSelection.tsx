@@ -35,7 +35,7 @@ const GameSelection: React.FC = () => {
         <div className="container fade-in">
             <div className="header">
                 <h1>Seleção de Jogos</h1>
-                <p>Escolha seus jogos favoritos. {consoleInfo.desbloqueio ? 'Os primeiros 5 são grátis!' : 'Apenas R$4,00 cada.'}</p>
+                <p>Escolha seus jogos favoritos. {consoleInfo.desbloqueio ? 'Os primeiros 5 são grátis!' : 'Apenas R$5,00 cada.'}</p>
             </div>
 
             {/* Sticky Stats Bar */}
