@@ -7,7 +7,7 @@ const Home: React.FC = () => {
     return (
         <div className="container fade-in">
             <div className="header" style={{ paddingBottom: '20px' }}>
-                <img src="/logo.png" alt="ALM TEC" className="logo fade-in" style={{ width: '120px', height: 'auto', marginBottom: '20px' }} />
+                <img src="/logo_servicos.png" alt="ALM TEC" className="logo fade-in" style={{ width: '280px', height: 'auto', marginBottom: '20px', borderRadius: '12px' }} />
                 <h1 className="fade-in delay-100" style={{ fontSize: '3.5rem' }}>
                     Desbloqueio <br />
                     <span className="text-gradient" style={{ fontSize: '4.5rem' }}>Xbox 360 RGH</span>
