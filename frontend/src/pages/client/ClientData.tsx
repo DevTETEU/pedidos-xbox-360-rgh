@@ -55,6 +55,7 @@ const ClientData: React.FC = () => {
         <div className="container fade-in">
             <div className="header">
                 <h1>Seus Dados</h1>
+                <p className="subtitle">Preencha suas informações de contato para que possamos atualizar você sobre o pedido.</p>
             </div>
             <div className="card">
                 <label>Nome Completo *</label>

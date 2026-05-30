@@ -23,6 +23,7 @@ const StorageCheck: React.FC = () => {
         <div className="container fade-in">
             <div className="header">
                 <h1>Armazenamento</h1>
+                <p className="subtitle">Verificação de espaço para instalação de jogos.</p>
             </div>
             <div className="card" style={{ textAlign: 'center' }}>
                 <h3>Você possui HD Externo ou Pen Drive para instalar os jogos?</h3>

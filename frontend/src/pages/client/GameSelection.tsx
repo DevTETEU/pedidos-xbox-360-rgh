@@ -59,14 +59,16 @@ const GameSelection: React.FC = () => {
             {/* Sticky Stats Bar */}
             <div style={{
                 position: 'sticky', top: 0, zIndex: 100,
-                backgroundColor: 'rgba(30, 30, 30, 0.95)',
-                padding: '15px',
-                borderRadius: '0 0 8px 8px',
-                boxShadow: '0 4px 10px rgba(0,0,0,0.5)',
+                backgroundColor: 'var(--color-surface)',
+                padding: '15px 20px',
+                borderRadius: '0 0 var(--radius-lg) var(--radius-lg)',
+                boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                backdropFilter: 'blur(10px)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
                 marginBottom: '20px',
-                borderBottom: '1px solid var(--color-primary)'
+                border: '1px solid var(--color-border)',
+                borderTop: 'none'
             }}>
                 <div style={{ display: 'flex', gap: '20px' }}>
                     <div>

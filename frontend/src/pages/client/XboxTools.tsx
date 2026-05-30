@@ -56,7 +56,7 @@ const XboxTools: React.FC = () => {
         <div className="container fade-in">
             <div className="header">
                 <h1>Ferramentas Xbox 360</h1>
-                <p style={{ color: '#ccc' }}>Recursos uteis para planejar desbloqueio, jogos e entrega.</p>
+                <p className="subtitle">Recursos úteis para planejar desbloqueio, jogos e entrega.</p>
             </div>
 
             <div className="card">

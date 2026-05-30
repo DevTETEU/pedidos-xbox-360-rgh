@@ -19,6 +19,7 @@ const ConsoleSelection: React.FC = () => {
         <div className="container fade-in">
             <div className="header">
                 <h1>Sobre o Console</h1>
+                <p className="subtitle">Precisamos de detalhes sobre o seu console para o desbloqueio.</p>
             </div>
             <div className="card">
                 <label>Qual o modelo do seu Xbox 360?</label>

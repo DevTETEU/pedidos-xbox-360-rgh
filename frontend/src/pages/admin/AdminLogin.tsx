@@ -46,23 +46,30 @@ const AdminLogin: React.FC = () => {
     };
 
     return (
-        <div className="container" style={{ maxWidth: '400px', marginTop: '100px' }}>
-            <div className="card" style={{ textAlign: 'center' }}>
-                <h1>Admin Login</h1>
-                <input
-                    type="password"
-                    placeholder="Senha"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                            void handleLogin();
-                        }
-                    }}
-                />
-                <button className="btn" onClick={handleLogin} style={{ width: '100%' }} disabled={loading}>
-                    {loading ? 'Entrando...' : 'Entrar'}
-                </button>
+        <div className="container fade-in" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '80vh' }}>
+            <div className="card" style={{ width: '100%', maxWidth: '400px', textAlign: 'center', padding: '40px 30px' }}>
+                <div style={{ marginBottom: '30px' }}>
+                    <h1 style={{ fontSize: '2rem' }}>Acesso <span className="accent-text">Restrito</span></h1>
+                    <p style={{ color: '#888', marginTop: '10px' }}>Painel Administrativo ALM TEC</p>
+                </div>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    <input
+                        type="password"
+                        placeholder="Digite sua senha de acesso"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                void handleLogin();
+                            }
+                        }}
+                        style={{ textAlign: 'center', letterSpacing: '2px', fontSize: '1.2rem' }}
+                    />
+                    <button className="btn" onClick={handleLogin} style={{ width: '100%' }} disabled={loading}>
+                        {loading ? 'Verificando...' : 'Entrar no Painel'}
+                    </button>
+                </div>
             </div>
         </div>
     );

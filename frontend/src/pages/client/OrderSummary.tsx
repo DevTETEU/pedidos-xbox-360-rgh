@@ -66,57 +66,99 @@ const OrderSummary: React.FC = () => {
     };
 
     return (
-        <div className="container fade-in">
-            <div className="header">
-                <h1>Resumo do Pedido</h1>
+        <div className="container fade-in" style={{ maxWidth: '800px', marginTop: '40px' }}>
+            <div className="header" style={{ textAlign: 'center', marginBottom: '30px' }}>
+                <h1>Resumo do <span className="accent-text">Pedido</span></h1>
+                <p>Revise suas escolhas antes de enviar.</p>
             </div>
 
-            <div className="card">
-                <h3>👤 Dados do Cliente</h3>
-                <p><strong>Nome:</strong> {client.nome}</p>
-                <p><strong>WhatsApp:</strong> {client.whatsapp}</p>
-                {client.observacoes && <p><strong>Obs:</strong> {client.observacoes}</p>}
-            </div>
-
-            <div className="card">
-                <h3>🎮 Informações do Console</h3>
-                <p><strong>Modelo:</strong> {consoleInfo.modelo}</p>
-                <p><strong>Serviço RGH:</strong> {consoleInfo.desbloqueio ? 'Sim (+R$50,00)' : 'Não'}</p>
-                <p><strong>Armazenamento Externo:</strong> {consoleInfo.possuiArmazenamento ? 'Possui' : 'Não Possui'}</p>
-            </div>
-
-            <div className="card">
-                <h3>🕹️ Jogos Selecionados ({selectedGames.length})</h3>
-                <p><small>Jogos Grátis: {freeGamesCount} | Jogos Pagos: {paidGamesCount}</small></p>
-
-                <ul style={{ maxHeight: '200px', overflowY: 'auto', margin: '10px 0', paddingLeft: '20px' }}>
-                    {selectedGames.map(g => (
-                        <li key={g.id}>{g.nome} <span style={{ color: '#888', fontSize: '0.8rem' }}>({g.categoria})</span></li>
-                    ))}
-                </ul>
-            </div>
-
-            <div className="card" style={{ border: '2px solid var(--color-primary)', backgroundColor: 'rgba(16, 124, 16, 0.05)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <h3>TOTAL A PAGAR</h3>
-                    <h1 style={{ color: 'var(--color-primary)' }}>R$ {totalPrice.toFixed(2)}</h1>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <div className="card">
+                    <h3 style={{ marginBottom: '15px', color: 'var(--xbox-green)' }}>👤 Dados do Cliente</h3>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                        <div>
+                            <span style={{ color: '#888', fontSize: '0.9rem' }}>Nome</span>
+                            <p style={{ fontSize: '1.1rem' }}>{client.nome}</p>
+                        </div>
+                        <div>
+                            <span style={{ color: '#888', fontSize: '0.9rem' }}>WhatsApp</span>
+                            <p style={{ fontSize: '1.1rem' }}>{client.whatsapp}</p>
+                        </div>
+                        {client.observacoes && (
+                            <div style={{ gridColumn: '1 / -1' }}>
+                                <span style={{ color: '#888', fontSize: '0.9rem' }}>Observações</span>
+                                <p>{client.observacoes}</p>
+                            </div>
+                        )}
+                    </div>
                 </div>
-                <button
-                    className="btn"
-                    style={{ width: '100%', marginTop: '20px', fontSize: '1.2rem' }}
-                    onClick={handleConfirm}
-                    disabled={submitting}
-                >
-                    {submitting ? 'Enviando...' : 'CONFIRMAR PEDIDO ✅'}
-                </button>
-                <button
-                    className="btn btn-secondary"
-                    style={{ width: '100%', marginTop: '10px' }}
-                    onClick={() => navigate('/games')}
-                    disabled={submitting}
-                >
-                    Voltar e Editar
-                </button>
+
+                <div className="card">
+                    <h3 style={{ marginBottom: '15px', color: 'var(--xbox-green)' }}>🎮 Informações do Console</h3>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                        <div>
+                            <span style={{ color: '#888', fontSize: '0.9rem' }}>Modelo</span>
+                            <p style={{ fontSize: '1.1rem' }}>{consoleInfo.modelo}</p>
+                        </div>
+                        <div>
+                            <span style={{ color: '#888', fontSize: '0.9rem' }}>Serviço RGH</span>
+                            <p style={{ fontSize: '1.1rem' }}>{consoleInfo.desbloqueio ? 'Sim (+R$ 50,00)' : 'Não'}</p>
+                        </div>
+                        <div style={{ gridColumn: '1 / -1' }}>
+                            <span style={{ color: '#888', fontSize: '0.9rem' }}>Armazenamento Externo (HD/PenDrive)</span>
+                            <p style={{ fontSize: '1.1rem' }}>{consoleInfo.possuiArmazenamento ? 'Possui' : 'Não Possui'}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="card">
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+                        <h3 style={{ color: 'var(--xbox-green)' }}>🕹️ Jogos Selecionados</h3>
+                        <span style={{ backgroundColor: 'rgba(255,255,255,0.1)', padding: '5px 12px', borderRadius: '20px', fontSize: '0.9rem' }}>
+                            Total: {selectedGames.length}
+                        </span>
+                    </div>
+                    <div style={{ display: 'flex', gap: '15px', marginBottom: '15px' }}>
+                        <span style={{ color: '#2ecc71', fontSize: '0.9rem' }}>• {freeGamesCount} Grátis</span>
+                        <span style={{ color: '#f39c12', fontSize: '0.9rem' }}>• {paidGamesCount} Pagos</span>
+                    </div>
+
+                    <div style={{ maxHeight: '250px', overflowY: 'auto', paddingRight: '10px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        {selectedGames.map(g => (
+                            <div key={g.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
+                                <div>
+                                    <p style={{ fontWeight: '500' }}>{g.nome}</p>
+                                    <span style={{ color: '#888', fontSize: '0.8rem' }}>{g.categoria}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="card" style={{ border: '2px solid var(--xbox-green)', background: 'linear-gradient(145deg, rgba(16, 124, 16, 0.1), rgba(20, 20, 20, 0.9))' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                        <h3 style={{ fontSize: '1.5rem' }}>TOTAL A PAGAR</h3>
+                        <h1 style={{ color: 'var(--xbox-green)', fontSize: '2.5rem' }}>R$ {totalPrice.toFixed(2).replace('.', ',')}</h1>
+                    </div>
+                    
+                    <button
+                        className="btn"
+                        style={{ width: '100%', padding: '18px', fontSize: '1.2rem', marginBottom: '15px' }}
+                        onClick={handleConfirm}
+                        disabled={submitting}
+                    >
+                        {submitting ? 'Enviando Pedido...' : 'CONFIRMAR PEDIDO'}
+                    </button>
+                    
+                    <button
+                        className="btn"
+                        style={{ width: '100%', background: 'transparent', border: '1px solid #444', color: '#ccc' }}
+                        onClick={() => navigate('/games')}
+                        disabled={submitting}
+                    >
+                        Voltar e Editar
+                    </button>
+                </div>
             </div>
         </div>
     );

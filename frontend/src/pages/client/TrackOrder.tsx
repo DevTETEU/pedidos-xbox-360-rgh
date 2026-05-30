@@ -50,35 +50,83 @@ const TrackOrder: React.FC = () => {
     };
 
     return (
-        <div className="container fade-in">
-            <div className="header">
-                <h1>Acompanhar Pedido</h1>
+        <div className="container fade-in" style={{ maxWidth: '600px', marginTop: '60px' }}>
+            <div className="header" style={{ textAlign: 'center', marginBottom: '30px' }}>
+                <h1><span className="accent-text">Acompanhar</span> Pedido</h1>
                 <p>Consulte seu status com o ID do pedido e seu WhatsApp.</p>
             </div>
-            <div className="card">
-                <label>Número do Pedido</label>
-                <input value={orderId} onChange={(e) => setOrderId(e.target.value)} placeholder="Ex: 123" />
+            
+            <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                <div>
+                    <label style={{ display: 'block', marginBottom: '8px', color: '#ccc' }}>Número do Pedido</label>
+                    <input 
+                        value={orderId} 
+                        onChange={(e) => setOrderId(e.target.value)} 
+                        placeholder="Ex: 123" 
+                    />
+                </div>
 
-                <label>WhatsApp</label>
-                <input value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} placeholder="Ex: (11) 99999-9999" />
+                <div>
+                    <label style={{ display: 'block', marginBottom: '8px', color: '#ccc' }}>WhatsApp (apenas números ou formatado)</label>
+                    <input 
+                        value={whatsapp} 
+                        onChange={(e) => setWhatsapp(e.target.value)} 
+                        placeholder="Ex: (11) 99999-9999" 
+                    />
+                </div>
 
-                <button className="btn" style={{ width: '100%', marginTop: '14px' }} onClick={handleTrack} disabled={loading}>
+                <button 
+                    className="btn" 
+                    style={{ width: '100%', marginTop: '10px' }} 
+                    onClick={handleTrack} 
+                    disabled={loading}
+                >
                     {loading ? 'Consultando...' : 'Consultar Status'}
                 </button>
 
-                {error && <p style={{ marginTop: '12px', color: '#e74c3c' }}>{error}</p>}
-
-                {result && (
-                    <div style={{ marginTop: '16px', borderTop: '1px solid #333', paddingTop: '12px' }}>
-                        <p><strong>Pedido:</strong> #{result.id}</p>
-                        <p><strong>Cliente:</strong> {result.cliente}</p>
-                        <p><strong>Status:</strong> {result.status}</p>
-                        <p><strong>Data:</strong> {new Date(result.data).toLocaleString('pt-BR')}</p>
-                        <p><strong>Modelo:</strong> {result.modeloXbox}</p>
-                        <p><strong>Total:</strong> R$ {result.total.toFixed(2)}</p>
-                    </div>
-                )}
+                {error && <p style={{ marginTop: '12px', color: '#ff4d4d', textAlign: 'center', fontWeight: '500' }}>{error}</p>}
             </div>
+
+            {result && (
+                <div className="card fade-in" style={{ marginTop: '30px', borderTop: '4px solid var(--xbox-green)' }}>
+                    <h3 style={{ marginBottom: '20px', color: 'var(--xbox-green)' }}>Status Atualizado</h3>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                        <div>
+                            <span style={{ color: '#888', fontSize: '0.9rem' }}>Pedido ID</span>
+                            <p style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>#{result.id}</p>
+                        </div>
+                        <div>
+                            <span style={{ color: '#888', fontSize: '0.9rem' }}>Status</span>
+                            <p style={{ 
+                                fontSize: '1.1rem', 
+                                fontWeight: 'bold', 
+                                color: result.status === 'Concluído' ? 'var(--xbox-green)' : 
+                                       result.status === 'Em andamento' ? '#f39c12' : '#3498db'
+                            }}>
+                                {result.status}
+                            </p>
+                        </div>
+                        <div style={{ gridColumn: '1 / -1' }}>
+                            <span style={{ color: '#888', fontSize: '0.9rem' }}>Cliente</span>
+                            <p style={{ fontSize: '1.1rem' }}>{result.cliente}</p>
+                        </div>
+                        <div style={{ gridColumn: '1 / -1' }}>
+                            <span style={{ color: '#888', fontSize: '0.9rem' }}>Modelo</span>
+                            <p style={{ fontSize: '1.1rem' }}>{result.modeloXbox}</p>
+                        </div>
+                        <div>
+                            <span style={{ color: '#888', fontSize: '0.9rem' }}>Data</span>
+                            <p>{new Date(result.data).toLocaleDateString('pt-BR')} às {new Date(result.data).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</p>
+                        </div>
+                        <div>
+                            <span style={{ color: '#888', fontSize: '0.9rem' }}>Total</span>
+                            <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--xbox-green)' }}>
+                                R$ {result.total.toFixed(2).replace('.', ',')}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
