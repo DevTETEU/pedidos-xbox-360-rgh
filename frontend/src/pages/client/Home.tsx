@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,93 +6,62 @@ const Home: React.FC = () => {
 
     return (
         <div className="container fade-in">
-            <div className="header">
-                <img src="/logo.png" alt="ALM TEC - Pedidos Xbox 360 RGH" className="logo fade-in" />
-                <h1 className="fade-in delay-100">Desbloqueio <span className="text-gradient">Xbox 360 RGH</span></h1>
-                <p className="subtitle fade-in delay-200">
-                    Liberte todo o potencial do seu Xbox 360. <br />
-                    Acesso total aos seus jogos, menus personalizados e muito mais.
+            <div className="header" style={{ paddingBottom: '20px' }}>
+                <img src="/logo.png" alt="ALM TEC" className="logo fade-in" style={{ width: '120px', height: 'auto', marginBottom: '20px' }} />
+                <h1 className="fade-in delay-100" style={{ fontSize: '3.5rem' }}>
+                    Desbloqueio <br />
+                    <span className="text-gradient" style={{ fontSize: '4.5rem' }}>Xbox 360 RGH</span>
+                </h1>
+                <p className="subtitle fade-in delay-200" style={{ marginTop: '20px', lineHeight: '1.8' }}>
+                    Liberte todo o potencial do seu console. Jogue via HD, controle <br />a temperatura e tenha a interface Aurora configurada.
                 </p>
-            </div>
-
-            <div className="card text-center fade-in delay-300" style={{ padding: '50px' }}>
-                <h2 style={{ marginBottom: '30px', fontSize: '2rem' }}>
-                    Transforme seu Console
-                </h2>
                 
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '15px', justifyContent: 'center', marginBottom: '40px' }}>
-                    <div style={{ background: 'rgba(16, 124, 16, 0.1)', padding: '10px 20px', borderRadius: '30px', border: '1px solid rgba(16, 124, 16, 0.3)' }}>
-                        🎮 Jogue do HD/Pendrive
-                    </div>
-                    <div style={{ background: 'rgba(16, 124, 16, 0.1)', padding: '10px 20px', borderRadius: '30px', border: '1px solid rgba(16, 124, 16, 0.3)' }}>
-                        🎨 Interface Aurora
-                    </div>
-                    <div style={{ background: 'rgba(16, 124, 16, 0.1)', padding: '10px 20px', borderRadius: '30px', border: '1px solid rgba(16, 124, 16, 0.3)' }}>
-                        ⚡ Controle de Temperatura
-                    </div>
-                    <div style={{ background: 'rgba(255, 193, 7, 0.1)', padding: '10px 20px', borderRadius: '30px', border: '1px solid rgba(255, 193, 7, 0.3)', color: '#ffc107', fontWeight: 'bold' }}>
-                        🎁 5 Jogos Brinde!
-                    </div>
-                </div>
-
-                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '15px', marginTop: '20px' }}>
-                    <button
-                        className="btn"
-                        style={{ fontSize: '1.25rem', padding: '16px 40px', minWidth: '250px' }}
-                        onClick={() => navigate('/client')}
-                    >
-                        🚀 Fazer Pedido Agora
+                <div className="fade-in delay-300" style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '40px' }}>
+                    <button className="btn" onClick={() => navigate('/client')} style={{ fontSize: '1.2rem', padding: '18px 48px' }}>
+                        🚀 Iniciar Pedido
                     </button>
-                    <button
-                        className="btn btn-secondary"
-                        onClick={() => navigate('/track')}
-                    >
-                        📦 Acompanhar Pedido
-                    </button>
-                    <button
-                        className="btn btn-secondary"
-                        onClick={() => navigate('/xbox-tools')}
-                    >
-                        🛠️ Ferramentas
+                    <button className="btn btn-secondary" onClick={() => navigate('/track')} style={{ fontSize: '1.1rem', padding: '18px 36px' }}>
+                        📦 Acompanhar
                     </button>
                 </div>
             </div>
 
-            {/* Galeria / Feedbacks Section */}
-            <div style={{ marginTop: '60px' }} className="fade-in delay-300">
-                <div className="text-center">
-                    <h2 style={{ fontSize: '2.5rem', marginBottom: '10px' }}>Por Que Escolher a <span className="text-gradient">ALM TEC</span>?</h2>
-                    <p style={{ color: 'var(--color-text-secondary)', marginBottom: '40px' }}>Serviço de qualidade comprovada por centenas de clientes.</p>
-                </div>
-                
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
-                    <div className="card">
-                        <div style={{ fontSize: '2rem', marginBottom: '15px' }}>🛡️</div>
-                        <h3 style={{ fontSize: '1.25rem', marginBottom: '10px' }}>Segurança Garantida</h3>
-                        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.95rem' }}>Procedimentos feitos com solda de precisão e higienização completa da placa e troca de pasta térmica.</p>
-                    </div>
+            <div className="fade-in delay-400" style={{ marginTop: '40px' }}>
+                <div className="card" style={{ position: 'relative', overflow: 'hidden' }}>
+                    <div style={{ position: 'absolute', top: '-50px', right: '-50px', width: '200px', height: '200px', background: 'var(--color-primary)', filter: 'blur(100px)', opacity: 0.15, borderRadius: '50%' }}></div>
                     
-                    <div className="card">
-                        <div style={{ fontSize: '2rem', marginBottom: '15px' }}>⚡</div>
-                        <h3 style={{ fontSize: '1.25rem', marginBottom: '10px' }}>Pronto para Jogar</h3>
-                        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.95rem' }}>Console já sai configurado com Aurora, DashLaunch e Freestyle. É só ligar e aproveitar.</p>
-                    </div>
+                    <h2 style={{ fontSize: '2.2rem', marginBottom: '40px', textAlign: 'center' }}>Vantagens do Serviço</h2>
                     
-                    <div className="card">
-                        <div style={{ fontSize: '2rem', marginBottom: '15px' }}>🤝</div>
-                        <h3 style={{ fontSize: '1.25rem', marginBottom: '10px' }}>Suporte Especializado</h3>
-                        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.95rem' }}>Tiramos todas suas dúvidas pós-desbloqueio e ajudamos na instalação dos primeiros jogos.</p>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px' }}>
+                        {[
+                            { icon: '🎮', title: 'Jogos do HD', desc: 'Esqueça os CDs arranhados. Rode tudo do Pendrive ou HD Externo.' },
+                            { icon: '🎨', title: 'Aurora Dash', desc: 'Interface linda, moderna e com capas automáticas via internet.' },
+                            { icon: '❄️', title: 'Refrigeração', desc: 'Ajuste de ventoinhas e troca de pasta térmica inclusos.' },
+                            { icon: '🎁', title: '5 Jogos Grátis', desc: 'Ao fazer o RGH conosco, você ganha 5 jogos da sua escolha.' }
+                        ].map((item, idx) => (
+                            <div key={idx} style={{ 
+                                background: 'rgba(255, 255, 255, 0.02)', 
+                                padding: '24px', 
+                                borderRadius: 'var(--radius-lg)',
+                                border: '1px solid rgba(255,255,255,0.05)',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '12px'
+                            }}>
+                                <span style={{ fontSize: '2.5rem' }}>{item.icon}</span>
+                                <h3 style={{ fontSize: '1.2rem', margin: 0, color: '#fff' }}>{item.title}</h3>
+                                <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', lineHeight: '1.5' }}>{item.desc}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
-            
-            <div className="text-center" style={{ marginTop: '40px', padding: '20px 0', borderTop: '1px solid var(--color-border)', color: 'var(--color-text-secondary)', fontSize: '0.9rem' }}>
-                <p>&copy; {new Date().getFullYear()} ALM TEC. Todos os direitos reservados.</p>
-                <div style={{ marginTop: '10px' }}>
-                    <button className="btn-secondary" style={{ padding: '6px 12px', fontSize: '0.8rem', border: 'none', cursor: 'pointer', background: 'none', color: 'inherit' }} onClick={() => navigate('/admin')}>
-                        Acesso Administrativo
-                    </button>
-                </div>
+
+            <div className="text-center fade-in delay-400" style={{ marginTop: '60px', padding: '30px 0', borderTop: '1px solid var(--color-border)' }}>
+                <p style={{ color: 'var(--color-text-secondary)' }}>&copy; {new Date().getFullYear()} ALM TEC. Qualidade garantida.</p>
+                <button className="btn-secondary" style={{ marginTop: '20px', padding: '8px 16px', fontSize: '0.8rem', background: 'transparent', border: 'none', color: '#666' }} onClick={() => navigate('/admin')}>
+                    Acesso Restrito
+                </button>
             </div>
         </div>
     );
