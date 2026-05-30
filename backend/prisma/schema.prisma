@@ -1,0 +1,45 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Game {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  categoria String
+  orders    OrderItem[]
+}
+
+model Order {
+  id               Int      @id @default(autoincrement())
+  cliente          String
+  whatsapp         String
+  observacoes      String?
+  modeloXbox       String
+  desbloqueio      Boolean  @default(false)
+  possuiArmazenamento Boolean @default(false)
+  total            Float
+  status           String   @default("Novo") // Novo, Em andamento, Concluído
+  data             DateTime @default(now())
+  itens            OrderItem[]
+}
+
+model OrderItem {
+  id       Int     @id @default(autoincrement())
+  pedido   Order   @relation(fields: [pedidoId], references: [id])
+  pedidoId Int
+  jogo     Game    @relation(fields: [jogoId], references: [id])
+  jogoId   Int
+  gratuito Boolean @default(false)
+}
+
+model Admin {
+  id       Int    @id @default(autoincrement())
+  username String @unique
+  password String
+}
